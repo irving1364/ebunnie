@@ -1,0 +1,89 @@
+{
+    "id": "footer-data-01",
+    "logo-widget": {
+        "logo": [
+            {
+                "src": "/logo.png",
+                "alt": "logo"
+            },
+            {
+                "src": "/logo-negro.png",
+                "alt": "logo"
+            }
+        ],
+        "text": ""
+    },
+    "newsletter-widget": {
+        "title": "Get The Latest Nuron Updates",
+        "note": "Email is safe. We don't spam."
+    },
+    "quicklink-widget": {
+        "title": "Paginas",
+        "menu": [
+            {
+                "id": 1,
+                "text": "Anúnciate",
+                "path": "/"
+            },
+            {
+                "id": 2,
+                "text": "Contacto",
+                "path": "/"
+            },
+            {
+                "id": 3,
+                "text": "Terminos y Condiciones",
+                "path": "/"
+            },
+            {
+                "id": 4,
+                "text": "Politicas y Privacidad",
+                "path": "/"
+            },
+            {
+                "id": 5,
+                "text": "Nosotros",
+                "path": "/"
+            }
+        ]
+    },
+    "information-widget": {
+        "title": "Scort",
+        "menu": [
+            {
+                "id": 1,
+                "text": "Start Bunnie",
+                "path": "/"
+            },
+            {
+                "id": 2,
+                "text": "Scort Verfied",
+                "path": "/"
+            },
+            {
+                "id": 3,
+                "text": "Scort Vip",
+                "path": "/"
+            }
+        ]
+    },
+    "soldout-widget": {
+        "title": "Portal sobre escort para mayores de 18 años.",
+        "products": []
+    },
+    "footer-link-widget": {
+        "menu": [
+            {
+                "id": 1,
+                "text": "",
+                "path": ""
+            },
+            {
+                "id": 2,
+                "text": "",
+                "path": ""
+            }
+        ]
+    },
+    "copyright_text": "©2022 Ebunnie, Inc.Todos los derechos reservados"
+}
