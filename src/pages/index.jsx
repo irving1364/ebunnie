@@ -26,7 +26,7 @@ const Home09 = () => {
     );
     return (
         <Wrapper>
-            <SEO pageTitle="Ebunnie | Inicio" />
+            <SEO pageTitle="Inicio" />
             <Header />
             <main id="main-content">
                 <HeroArea data={content["hero-section"]} />
