@@ -20,7 +20,7 @@ const Breadcrumb = ({ pageTitle, currentPage, className, space }) => (
                 <div className="col-lg-6 col-md-6 col-12">
                     <ul className="breadcrumb-list">
                         <li className="item">
-                            <Anchor path="/">Home</Anchor>
+                            <Anchor path="/">Inicio</Anchor>
                         </li>
                         <li className="separator">
                             <i className="feather-chevron-right" />

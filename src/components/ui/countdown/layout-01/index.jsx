@@ -1,15 +1,17 @@
 import Countdown, { zeroPad } from "react-countdown";
 import PropTypes from "prop-types";
 
-const CountdownTimer = ({ date }) => {
-    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+const CountdownTimer = ({ date, usuario }) => {
+    const renderer = ({ days, hours, minutes, seconds, completed, }) => {
 
         return (
             <div className="countdown">
+                <a href={`/anuncio/`+ usuario}>
                 <div className="countdown-container days">
-                    <span className="countdown-value">Nombre</span>
+                    <span className="countdown-value">{date}</span>
                     {/*   <span className="countdown-heading">D&apos;s</span>*/}
                 </div>
+                </a>
                 {/* 
                 <div className="countdown-container hours">
                     <span className="countdown-value">{zeroPad(hours)}</span>

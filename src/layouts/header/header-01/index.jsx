@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Web3 from "web3";
@@ -9,6 +9,7 @@ import MobileMenu from "@components/menu/mobile-menu";
 import SearchForm from "@components/search-form/layout-01";
 import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
+import UserLogDropdown from "@components/user-log-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import BurgerButton from "@ui/burger-button";
 import Anchor from "@ui/anchor";
@@ -16,10 +17,25 @@ import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import headerData from "../../../data/general/header-01.json";
 import menuData from "../../../data/general/menu-01.json";
+import { useLocalStorage } from "src/hooks/use-local-storage";
+import { toast } from "react-toastify";
 
 import { FaCircleUser } from "react-icons/fa6";
+import { useRouter } from 'next/router'
+
 
 const Header = ({ className }) => {
+    //console.log(useLocalStorage("usuario"))
+    const [load, setLoad] = useState(false); 
+    const [usuario, setUsuario] = useLocalStorage("usuario");
+    const [logueado, setLogueado] = useState(false); 
+    
+    const router = useRouter();
+    
+    useEffect(() => {
+        setLoad(true)
+    }, []);
+
     const sticky = useSticky();
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
@@ -60,10 +76,28 @@ const Header = ({ className }) => {
     };
 
     const onDisconnect = () => {
-        setIsAuthenticated(false);
+        
+        localStorage.removeItem("usuario");
+        localStorage.removeItem("tipo_usuario");
+        localStorage.removeItem("correo");
+        localStorage.removeItem("tokens");
+        toast("Cerramos su sesion, lo redireccionaremos")
+        router.push('/login')
+        
+    //    window.location.href = "/";
     };
+   
 
-    return (
+ 
+    if(load) {
+      //  console.log(usuario);
+        if(usuario == 'undefined'){
+            setLogueado(true)         
+        }
+       
+        
+        //console.log(logueado);
+            return (
         <>
             <header
                 className={clsx(
@@ -86,9 +120,12 @@ const Header = ({ className }) => {
                             </div>
                         </div>
                         <div className="header-right">
+                            
+                            {/*
                             <div className="setting-option d-none d-lg-block">
                                 <SearchForm />
                             </div>
+
                             <div className="setting-option rn-icon-list d-block d-lg-none">
                                 <div className="icon-box search-mobile-icon">
                                     <button
@@ -101,7 +138,8 @@ const Header = ({ className }) => {
                                 </div>
                                 <FlyoutSearchForm isOpen={search} />
                             </div>
-                            {!isAuthenticated && (
+                             */}
+                            {usuario && (
                                 <div className="setting-option header-btn">
                                     <div className="icon-box">
                                         <Button
@@ -115,19 +153,26 @@ const Header = ({ className }) => {
                                     </div>
                                 </div>
                             )}
-                            {isAuthenticated && (
+                            
+                        
+                        
+
+                            {usuario != undefined  &&
                                 <div className="setting-option rn-icon-list user-account">
-                                    <UserDropdown
-                                        onDisconnect={onDisconnect}
-                                        ethBalance={ethBalance}
-                                    />
+                                    <UserDropdown onDisconnect={onDisconnect}
+                                        ethBalance={ethBalance} />
                                 </div>
-                            )}
-                            {!isAuthenticated && (
+                            }
+
+                            {usuario === undefined &&
                                 <div className="setting-option rn-icon-list user-account">
-                                    <h3> <FaCircleUser className="mt-4" /> </h3>
+                                    <UserLogDropdown onDisconnect={onDisconnect}/>
                                 </div>
-                            )}
+                            }
+
+
+
+
                             {isAuthenticated && (
                                 <div className="setting-option rn-icon-list notification-badge">
                                     <div className="icon-box">
@@ -160,7 +205,7 @@ const Header = ({ className }) => {
                 logo={headerData.logo}
             />
         </>
-    );
+    )}
 };
 
 Header.propTypes = {

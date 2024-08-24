@@ -1,25 +1,25 @@
 [
     {
         "id": 1,
-        "text": "Home",
+        "text": "Perfil",
         "path": "list-item-1",
         "icon": "feather-home"
     },
     {
         "id": 2,
-        "text": "Live Auction",
+        "text": "Verificación",
         "path": "list-item-2",
         "icon": "feather-heart"
     },
     {
         "id": 3,
-        "text": "Explore Product",
+        "text": "Planes",
         "path": "list-item-3",
         "icon": "feather-trending-up"
     },
     {
         "id": 4,
-        "text": "Newest Item",
+        "text": "Galeria",
         "path": "list-item-4",
         "icon": "feather-trending-up"
     }

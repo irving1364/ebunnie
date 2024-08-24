@@ -2,10 +2,41 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import Button from "@ui/button";
 import ErrorText from "@ui/error-text";
-import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
+
+import { useForm } from "react-hook-form";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useLocalStorage } from "src/hooks/use-local-storage";
+import { useEffect } from "react";
+
+
 const LoginForm = ({ className }) => {
+
+    const [usuario, setUsuario] = useLocalStorage("usuario");
+    const [tipo, setTipo] = useLocalStorage("tipo_usuario");
+    const [correo, setCorreo] = useLocalStorage("correo");
+    const [tokens, setTokens] = useLocalStorage("tokens");
+
+    
+
+  useEffect(()=>{
+    localStorage.removeItem("usuario");
+    localStorage.removeItem("tipo_usuario");
+    localStorage.removeItem("correo");
+    localStorage.removeItem("tokens");
+  },[]);
+
+
+    const handleIncrement = () => {
+      setCount((prevCount) => prevCount + 1);
+    };
+
+    
+
     const router = useRouter();
     const {
         register,
@@ -14,60 +45,117 @@ const LoginForm = ({ className }) => {
     } = useForm({
         mode: "onChange",
     });
-    const onSubmit = (data, e) => {
-        e.preventDefault();
-        // eslint-disable-next-line no-console
-        console.log(data);
-        router.push({
-            pathname: "/",
-        });
-    };
+
+    /*    const onSubmit = (data, e) => {
+            e.preventDefault();
+            // eslint-disable-next-line no-console
+            console.log(data);
+            router.push({
+                pathname: "/",
+            });
+        };*/
+
+   
+        
+        const onSubmit = async (e) => {
+            console.log(e)
+    
+            const form = new FormData();
+            form.append("usuario", e.usuario);
+            form.append("contrasena", e.contrasena);
+    
+    
+            var requestOptions = {
+                method: 'POST',
+                body: JSON.stringify({ 
+                    correo: e.usuario,
+                    contrasena: e.contrasena,
+               }),
+              };
+    
+            fetch( process.env.url + "auth/login", requestOptions)
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    console.log(json);
+                    console.log(json.code);
+                    if(json.code == 200){
+                        console.log(1);
+                        setUsuario(json.response.usuario);
+                        setTipo(json.response.tipo_usuario);
+                        setTokens(json.response.token);
+                        setCorreo(json.response.correo);
+                    
+                        toast("Su logueo es exitoso, lo redireccionaremos")
+    
+                        setTimeout(function(){
+
+                            router.push({
+                                pathname: "/",
+                            });
+                
+                        }, 4000);
+                    }
+                    if(json.code == 300){
+                        console.log(2);
+                        toast(json.response)
+                       
+                        
+                    }
+                                    
+                })
+                
+                .catch(error => toast("Ocurrio un error"));
+    
+        }
+
+
+
 
     return (
         <div className={clsx("form-wrapper-one", className)}>
-            <h4>Login</h4>
+            <h4>Login </h4>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-5">
                     <label htmlFor="exampleInputEmail1" className="form-label">
-                        Email address
+                        Usuario
                     </label>
+
                     <input
-                        type="email"
-                        id="exampleInputEmail1"
-                        {...register("exampleInputEmail1", {
-                            required: "Email is required",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: "invalid email address",
-                            },
+                        id="Usuario"
+                        type="text"
+                        {...register("usuario", {
+                            required: "Usuario es requerido",
                         })}
                     />
-                    {errors.exampleInputEmail1 && (
-                        <ErrorText>
-                            {errors.exampleInputEmail1?.message}
-                        </ErrorText>
+                    {errors.usuario && (
+                        <ErrorText>{errors.usuario?.message}</ErrorText>
                     )}
+
                 </div>
                 <div className="mb-5">
                     <label
                         htmlFor="exampleInputPassword1"
                         className="form-label"
                     >
-                        Password
+                        Contraseña
                     </label>
+
                     <input
+                        id="Contrasena"
                         type="password"
-                        id="exampleInputPassword1"
-                        {...register("exampleInputPassword1", {
-                            required: "Password is required",
+                        {...register("contrasena", {
+                            required: "Contraseña es requerido",
                         })}
                     />
-                    {errors.exampleInputPassword1 && (
-                        <ErrorText>
-                            {errors.exampleInputPassword1?.message}
-                        </ErrorText>
+                    {errors.contrasena && (
+                        <ErrorText>{errors.contrasena?.message}</ErrorText>
                     )}
+
+
                 </div>
+                {/* 
                 <div className="mb-5 rn-check-box">
                     <input
                         type="checkbox"
@@ -81,13 +169,20 @@ const LoginForm = ({ className }) => {
                     >
                         Remember me leter
                     </label>
-                </div>
+                </div>*/}
                 <Button type="submit" size="medium" className="mr--15">
-                    Log In
+                    Iniciar Sesión
                 </Button>
-                <Button path="/sign-up" color="primary-alta" size="medium">
-                    Sign Up
+             
+                <Button path="/registrate" className="mt-10" color="primary-alta" size="medium">
+                    Registro
                 </Button>
+
+                <Button path="/recuperar" className="mt-4" color="primary-alta" size="small">
+                    Olvidaste tu Contraseña?
+                </Button>
+
+
             </form>
         </div>
     );

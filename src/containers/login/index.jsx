@@ -17,7 +17,7 @@ const LoginArea = ({ className, space }) => (
                     <LoginForm />
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-12">
-                    <SocialAuth title="Another way to log in" />
+                    <SocialAuth title="Recuerde que" />
                 </div>
             </div>
         </div>

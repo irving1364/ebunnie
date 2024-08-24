@@ -7,12 +7,12 @@
     {
         "id": 2,
         "text": "HOMBRES",
-        "path": "/"
+        "path": "/hombres"
     },
 
     {
         "id": 6,
         "text": "TRANS/TV",
-        "path": "/"
+        "path": "/trans"
     }
 ]

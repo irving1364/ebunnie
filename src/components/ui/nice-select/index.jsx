@@ -21,11 +21,13 @@ const NiceSelect = ({
     useClickAway(ref, onClose);
 
     const currentHandler = (item) => {
+        //console.log(item, name)
         setCurrent(item);
         onChange(item, name);
         onClose();
     };
 
+    
     return (
         <div
             className={clsx("nice-select", className, open && "open")}
@@ -34,6 +36,7 @@ const NiceSelect = ({
             onClick={() => setOpen((prev) => !prev)}
             onKeyPress={(e) => e}
             ref={ref}
+            
         >
             <span className="current">{current?.text || placeholder}</span>
             <ul
@@ -41,6 +44,7 @@ const NiceSelect = ({
                 role="menubar"
                 onClick={(e) => e.stopPropagation()}
                 onKeyPress={(e) => e.stopPropagation()}
+                
             >
                 {options?.map((item) => (
                     <li

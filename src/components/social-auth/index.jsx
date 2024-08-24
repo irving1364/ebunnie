@@ -5,7 +5,26 @@ import Image from "next/image";
 const SocialAuth = ({ className, title }) => (
     <div className={clsx("social-share-media form-wrapper-one", className)}>
         <h6>{title}</h6>
-        <p>Lorem ipsum dolor sit, amet sectetur adipisicing elit.cumque.</p>
+        <p>Somos un sitio web para adultos y por ende debemos cumplir con reglas para poder ser legales.</p>
+        <button type="button" className="another-login login-facebook">
+            <span className="small-image">
+
+            </span>
+            <span>No permitimos menores de edad</span>
+        </button>
+        <button type="button" className="another-login login-facebook">
+            <span className="small-image">
+
+            </span>
+            <span>No a la violencia</span>
+        </button>
+        <button type="button" className="another-login login-facebook">
+            <span className="small-image">
+
+            </span>
+            <span>No a la discriminación</span>
+        </button>
+        {/* 
         <button type="button" className="another-login login-facebook">
             <span className="small-image">
                 <Image
@@ -16,40 +35,7 @@ const SocialAuth = ({ className, title }) => (
                 />
             </span>
             <span>Log in with Google</span>
-        </button>
-        <button type="button" className="another-login login-facebook">
-            <span className="small-image">
-                <Image
-                    src="/images/icons/facebook.png"
-                    alt="facebook login"
-                    width={26}
-                    height={27}
-                />
-            </span>
-            <span>Log in with Facebook</span>
-        </button>
-        <button type="button" className="another-login login-twitter">
-            <span className="small-image">
-                <Image
-                    src="/images/icons/tweeter.png"
-                    alt="tweeter login"
-                    width={26}
-                    height={27}
-                />
-            </span>
-            <span>Log in with Twitter</span>
-        </button>
-        <button type="button" className="another-login login-linkedin">
-            <span className="small-image">
-                <Image
-                    src="/images/icons/linkedin.png"
-                    alt="linkedin login"
-                    width={26}
-                    height={27}
-                />
-            </span>
-            <span>Log in with linkedin</span>
-        </button>
+        </button>*/}
     </div>
 );
 

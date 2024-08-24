@@ -16,4 +16,14 @@ module.exports = {
         ];
         return config;
     },
+    env: {
+        //url: 'http://localhost/backendUbunnie/index.php/',
+        url: 'https://bo.ubunnies.com/backendUbunnie/index.php/',
+        
+        //urlArchivos: 'http://localhost/backendUbunnie/',
+        urlArchivos: 'https://bo.ubunnies.com/backendUbunnie/',
+
+        //urlDominio: 'http://localhost:3000/',
+        urlDominio: 'https://bo.ubunnies.com/',
+      },
 };

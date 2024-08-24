@@ -27,12 +27,12 @@ const InputRange = ({ values, onChange, hideButton }) => {
             <div className="slider__range--output">
                 <div className="price__output--wrap">
                     <div className="price--output">
-                        <span>Price :</span>
+                        <span>Edad :</span>
                         <span className="output-label">
-                            ${values[0] || 0 / 100} - ${values[1] || 0 / 100}
+                            {values[0] || 0 / 100} - {values[1] || 0 / 100}
                         </span>
                     </div>
-                    {hideButton === false && (
+                    {hideButton === true && (
                         <div className="price--filter">
                             <Button size="small" path="#!">
                                 Filter

@@ -28,22 +28,17 @@
             {
                 "id": 2,
                 "text": "Contacto",
-                "path": "/"
+                "path": "/contacto"
             },
             {
                 "id": 3,
                 "text": "Terminos y Condiciones",
-                "path": "/"
+                "path": "/terminos-condiciones"
             },
             {
                 "id": 4,
                 "text": "Politicas y Privacidad",
-                "path": "/"
-            },
-            {
-                "id": 5,
-                "text": "Nosotros",
-                "path": "/"
+                "path": "/politica-privacidad"
             }
         ]
     },
@@ -53,17 +48,17 @@
             {
                 "id": 1,
                 "text": "Start Bunnie",
-                "path": "/"
+                "path": "/start"
             },
             {
                 "id": 2,
                 "text": "Scort Verfied",
-                "path": "/"
+                "path": "/verified"
             },
             {
                 "id": 3,
                 "text": "Scort Vip",
-                "path": "/"
+                "path": "/vip"
             }
         ]
     },

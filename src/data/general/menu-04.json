@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "text": "Perfil",
+        "path": "/perfil-miembro",
+        "icon": "feather-home"
+    },
+    
+    {
+        "id": 3,
+        "text": "Inicio",
+        "path": "/",
+        "icon": "feather-trending-up"
+    }
+]

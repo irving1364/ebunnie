@@ -2,10 +2,10 @@
     "id": "header-data-2",
     "logo": [
         {
-            "src": "/images/logo/logo-white.png"
+            "src": "/logo.png"
         },
         {
-            "src": "/images/logo/logo-dark.png"
+            "src": "/logo-negro.png"
         }
     ],
     "author": {

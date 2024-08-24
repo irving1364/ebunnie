@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Web3 from "web3";
 import SearchForm from "@components/search-form/layout-03";
 import Anchor from "@ui/anchor";
@@ -10,14 +10,28 @@ import FlyoutSearchForm from "@components/search-form/layout-02";
 import MobileMenu from "@components/menu/mobile-menu-02";
 import UserDropdown from "@components/user-dropdown";
 import { useOffcanvas, useFlyoutSearch } from "@hooks";
+import { useLocalStorage } from "src/hooks/use-local-storage";
+
+import UserLogDropdown from "@components/user-log-dropdown";
 
 // Demo Data
-import sideMenuData from "../../data/general/menu-02.json";
+import menuChica from "../../data/general/menu-02.json";
+import menuAdministrador from "../../data/general/menu-05.json";
 
 const TopBarArea = () => {
     const { search, searchHandler } = useFlyoutSearch();
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     // const { authenticate, isAuthenticated } = useMoralis();
+     console.log(useLocalStorage("usuario"))
+    const [load, setLoad] = useState(false); 
+    const [usuario, setUsuario] = useLocalStorage("usuario");
+    const [tipo_usuario, setTipoUsuario] = useLocalStorage("tipo_usuario");
+    
+    const [logueado, setLogueado] = useState(false); 
+    
+    useEffect(() => {
+        setLoad(true)
+    }, []);
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [ethBalance, setEthBalance] = useState("");
@@ -59,81 +73,56 @@ const TopBarArea = () => {
         setIsAuthenticated(false);
     };
 
-    return (
+
+
+
+    if(load) {
+        console.log(usuario);
+        if(usuario == 'undefined'){
+            setLogueado(true)         
+        }
+       
+        
+        console.log(logueado);
+            return (
         <>
             <div className="rn-top-bar-area">
-                <div className="d-none d-lg-block">
-                    <SearchForm />
-                </div>
-
+              
                 <div className="contact-area">
-                    <div className="rn-icon-list setting-option d-block d-lg-none">
-                        <div className="icon-box search-mobile-icon">
-                            <button
-                                type="button"
-                                aria-label="Click here to open search form"
-                                onClick={searchHandler}
-                            >
-                                <i className="feather-search" />
-                            </button>
-                        </div>
-                        <FlyoutSearchForm isOpen={search} />
-                    </div>
-                    <div className="setting-option">
-                        <div className="icon-box">
-                            <Anchor title="Contact With Us" path="/contact">
-                                <i className="feather-phone" />
-                            </Anchor>
-                        </div>
-                    </div>
-                    <div className="setting-option">
-                        <div className="icon-box">
-                            <Anchor title="Message" path="/contact">
-                                <i className="feather-message-circle" />
-                            </Anchor>
-                        </div>
-                    </div>
-                    <div className="setting-option rn-icon-list notification-badge">
-                        <div className="icon-box">
-                            <Anchor path="/activity">
-                                <i className="feather-bell" />
-                                <span className="badge">2</span>
-                            </Anchor>
-                        </div>
-                    </div>
-                    {/* <div className="setting-option header-btn">
-                        <div className="icon-box">
-                            <Button
-                                size="small"
-                                color="primary-alta"
-                                path="/create"
-                            >
-                                Create
-                            </Button>
-                        </div>
-                    </div> */}
+              
 
-                    {!isAuthenticated && (
-                        <div className="setting-option">
-                            <div className="icon-box">
-                                <Button
-                                    size="small"
-                                    color="primary-alta"
-                                    onClick={onConnect}
-                                >
-                                    Wallet connect
-                                </Button>
-                            </div>
-                        </div>
-                    )}
-                    {isAuthenticated && (
-                        <div className="setting-option rn-icon-list user-account">
-                            <UserDropdown
-                                onDisconnect={onDisconnect}
-                                ethBalance={ethBalance}
-                            />
-                        </div>
-                    )}
+                            {usuario && (
+                                <div className="setting-option header-btn">
+                                    <div className="icon-box">
+                                        <Button
+                                            color="primary-alta"
+                                            className="connectBtn"
+                                            size="small"
+                                            onClick={onConnect}
+                                        >
+                                            ANÚNCIATE 
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
+                            
+                        
+                        
+
+                            {usuario != undefined  &&
+                                <div className="setting-option rn-icon-list user-account">
+                                    <UserDropdown onDisconnect={onDisconnect}
+                                        ethBalance={ethBalance} />
+                                </div>
+                            }
+
+                            {usuario === undefined &&
+                                <div className="setting-option rn-icon-list user-account">
+                                    <UserLogDropdown />
+                                </div>
+                            }
+
+
                     <div className="setting-option mobile-menu-bar ml--5 d-block d-lg-none">
                         <div className="hamberger icon-box">
                             <BurgerButton onClick={offcanvasHandler} />
@@ -147,17 +136,30 @@ const TopBarArea = () => {
                     </div>
                 </div>
             </div>
-            <MobileMenu
-                menu={sideMenuData}
-                isOpen={offcanvas}
-                onClick={offcanvasHandler}
-                logo={[
-                    { src: "/images/logo/logo-white.png" },
-                    { src: "/images/logo/logo-dark.png" },
-                ]}
-            />
+            {tipo_usuario == "2" &&
+                <MobileMenu
+                    menu={menuChica}
+                    isOpen={offcanvas}
+                    onClick={offcanvasHandler}
+                    logo={[
+                        { src: "/logo.png" },
+                        { src: "/logo-negro.png" },
+                    ]}
+                />
+            }
+            {tipo_usuario == "3" &&
+                <MobileMenu
+                    menu={menuAdministrador}
+                    isOpen={offcanvas}
+                    onClick={offcanvasHandler}
+                    logo={[
+                        { src: "/logo.png" },
+                        { src: "/logo-negro.png" },
+                    ]}
+                />
+            }
         </>
-    );
+    )};
 };
 
 export default TopBarArea;

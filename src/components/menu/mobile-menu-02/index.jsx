@@ -2,8 +2,17 @@ import PropTypes from "prop-types";
 import { Offcanvas, OffcanvasHeader, OffcanvasBody } from "@ui/offcanvas";
 import Logo from "@components/logo";
 import { Link } from "react-scroll";
+import { useRouter } from "next/router";
 
-const MobileMenu = ({ isOpen, onClick, menu, logo }) => (
+const MobileMenu = ({ isOpen, onClick, menu, logo }) => {
+    const router = useRouter();
+    
+    const irInicio = () => {
+        router.push({
+            pathname: "/",
+        });
+    };
+    return (
     <Offcanvas isOpen={isOpen} onClick={onClick}>
         <OffcanvasHeader onClick={onClick}>
             <Logo logo={logo} />
@@ -28,11 +37,25 @@ const MobileMenu = ({ isOpen, onClick, menu, logo }) => (
                             </Link>
                         </li>
                     ))}
+                    <li id={100} key={100}>
+                            <a
+                                activeClass="active"
+                                className="nav-link smoth-animation"
+                                spy
+                                smooth
+                                offset={-50}
+                                duration={500}
+                                onClick={irInicio}
+                            >
+                                Inicio
+                            </a>
+                        </li>
+
                 </ul>
             </nav>
         </OffcanvasBody>
     </Offcanvas>
-);
+)}
 
 MobileMenu.propTypes = {
     isOpen: PropTypes.bool.isRequired,

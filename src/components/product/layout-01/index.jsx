@@ -9,10 +9,22 @@ import ProductBid from "@components/product-bid";
 import Button from "@ui/button";
 import { ImageType } from "@utils/types";
 import PlaceBidModal from "@components/modals/placebid-modal";
+import Link from "next/link";
 
 const CountdownTimer = dynamic(() => import("@ui/countdown/layout-01"), {
     ssr: false,
 });
+
+const CountdownTimerNuevo = dynamic(() => import("@ui/countdown/layout-02"), {
+    ssr: false,
+});
+
+const CountdownTimerVerificado = dynamic(() => import("@ui/countdown/layout-03"), {
+    ssr: false,
+});
+
+
+
 
 const ShareDropdown = dynamic(() => import("@components/share-dropdown"), {
     ssr: false,
@@ -21,6 +33,7 @@ const ShareDropdown = dynamic(() => import("@components/share-dropdown"), {
 const Product = ({
     overlay,
     title,
+    paquete_activo,
     slug,
     latestBid,
     price,
@@ -31,6 +44,7 @@ const Product = ({
     authors,
     placeBid,
     disableShareDropdown,
+    usuario,
 }) => {
     const [showBidModal, setShowBidModal] = useState(false);
     const handleBidModal = () => {
@@ -44,22 +58,26 @@ const Product = ({
                     !overlay && "no-overlay",
                     placeBid && "with-placeBid"
                 )}
-            >
+            >{image && (
                 <div className="card-thumbnail">
-                    {image?.src && (
-                        <Anchor path={`/product/${slug}`}>
-                            <Image
-                                src={image.src}
-                                alt={image?.alt || "NFT_portfolio"}
+                    
+                        <a href={`/anuncio/`+ usuario}>
+                            <img
+                                src={image}
+                                alt={image || "NFT_portfolio"}
                                 width={533}
                                 height={533}
                             />
-                        </Anchor>
-                    )}
-                    {auction_date && <CountdownTimer date={auction_date} />}
+                          
+                        </a>
+                    
+                    
+                    <CountdownTimer date={title} usuario={usuario}/>
+                     <CountdownTimerNuevo date={paquete_activo} usuario={usuario}/>                   
+                    <CountdownTimerVerificado date={paquete_activo} usuario={usuario}/>
 
                 </div>
-
+)}
 
             </div>
 

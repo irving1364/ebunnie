@@ -38,7 +38,7 @@ const SingleSlide = ({
             {image?.src && (
                 <Image
                     className="slider-bg"
-                    src="/model.jpg"
+                    src="/model.png"
                     alt="Slider BG"
                     quality={100}
                     priority

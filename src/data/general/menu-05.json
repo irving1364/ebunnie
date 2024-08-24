@@ -1,0 +1,27 @@
+
+[
+     {
+        "id": 1,
+        "text": "Verificación",
+        "path": "list-item-1",
+        "icon": "feather-home"
+    },
+    {
+        "id": 1,
+        "text": "Planes Historial",
+        "path": "list-item-2",
+        "icon": "feather-home"
+    },
+    {
+        "id": 3,
+        "text": "Banear Usuario",
+        "path": "list-item-3",
+        "icon": "feather-trending-up"
+    },
+    {
+        "id": 3,
+        "text": "Activar Plan Manual",
+        "path": "list-item-4",
+        "icon": "feather-trending-up"
+    }
+]

@@ -17,7 +17,7 @@ const VideoArea = ({
         )}
     >
         <div className="container">
-            <div className="row mb--40">
+            <div className="row mb--50">
                 <div className="title-area text-center">
                     {section_title?.title && (
                         <h3 className="title mb--15">{section_title.title}</h3>
